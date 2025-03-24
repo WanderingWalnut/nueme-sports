@@ -32,7 +32,7 @@ const LoginForm = () => {
     const canSubmit = [...Object.values(allData)].every(Boolean);
 
     return (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center min-h-screen">
             <div className="w-full max-w-sm rounded-lg border border-gray-200 bg-white p-4 py-8 shadow-md dark:border-gray-700 dark:bg-gray-800 sm:p-6 sm:py-10 md:p-8 md:py-14">
                 <form action="" onSubmit={handleLogin} className="group">
                     <h5 className="mb-2 text-center text-2xl font-medium text-gray-900 dark:text-white sm:text-3xl sm:font-semibold">
