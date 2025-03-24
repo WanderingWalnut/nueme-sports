@@ -48,6 +48,7 @@ export const AuthContextProvider = ({
           email: user.email,
           uid: user.uid,
         });
+        router.push("/dashboard");
       } else {
         setUser({ email: null, uid: null });
       }
