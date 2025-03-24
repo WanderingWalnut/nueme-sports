@@ -3,9 +3,12 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../../config/firebase.config";
+import { useRouter } from "next/router";
 
 // User data type interface
 interface UserType {
@@ -35,6 +38,7 @@ export const AuthContextProvider = ({
   // Define the constants for the user and loading state
   const [user, setUser] = useState<UserType>({ email: null, uid: null });
   const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   // Update the state depending on auth
   useEffect(() => {
@@ -59,8 +63,14 @@ export const AuthContextProvider = ({
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("User Registered Successfully");
-    } catch (error) {
-      console.error("User wasn't registered", error);
+      return true; // Indicate success
+    } catch (error: any) {
+      if (error.code === "auth/email-already-in-use") {
+        console.error("User already exists");
+      } else {
+        console.error("User wasn't registered", error);
+      }
+      return error.message; // Return the error message
     }
   };
 
@@ -75,9 +85,19 @@ export const AuthContextProvider = ({
     return await signOut(auth);
   };
 
+  const handleGoogle = async (e) => {
+    const provider = await new GoogleAuthProvider();
+    try {
+      signInWithPopup(auth, provider);
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Google Sign-In failed", error);
+    }
+  };
+
   // Wrap the children with the context provider
   return (
-    <AuthContext.Provider value={{ user, signUp, logIn, logOut }}>
+    <AuthContext.Provider value={{ user, signUp, logIn, logOut, handleGoogle }}>
       {loading ? null : children}
     </AuthContext.Provider>
   );
