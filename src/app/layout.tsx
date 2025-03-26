@@ -5,7 +5,7 @@ import { Poppins } from "next/font/google";
 import { AuthContextProvider } from "@/context/AuthContext";
 
 const poppins = Poppins({
-  weight: "600",
+  weight: ['400', '600'],
   style: "normal",
   subsets: ["latin"],
   display: "swap",

@@ -1,7 +1,8 @@
+"use client"
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { useAuth } from '@/context/AuthContext';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const Dashboard = () => {
     const { user, logOut } = useAuth();

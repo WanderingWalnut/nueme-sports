@@ -1,7 +1,8 @@
+"use client";
 import { useAuth } from "@/context/AuthContext";
 import { RegistrationType } from "@/types/AuthTypes";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiChevronLeft } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
@@ -121,7 +122,7 @@ const RegistrationForm = () => {
           </button>
           <div className="text-md flex items-center justify-center text-center font-medium text-gray-500 dark:text-gray-300">
             <NextLink
-              href="/"
+              href="/login"
               className="flex w-32 items-center justify-between text-gray-500 hover:text-gray-800 hover:underline dark:text-gray-200 dark:hover:text-white"
             >
               <FiChevronLeft className="text-xl" /> Login Instead

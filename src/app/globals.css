@@ -24,3 +24,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-poppins), "Times New Roman", serif;
 }
+
+html{
+  scroll-behavior: smooth;
+}
