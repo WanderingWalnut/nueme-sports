@@ -5,7 +5,6 @@ import { FiChevronRight } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "@/context/AuthContext";
 import { LoginType } from "@/types/AuthTypes";
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 
 const LoginForm = () => {

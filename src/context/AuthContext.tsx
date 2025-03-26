@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -8,7 +10,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../../config/firebase.config";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 // User data type interface
 interface UserType {
