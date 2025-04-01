@@ -9,7 +9,7 @@ import {
   signOut,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { auth } from "../../config/firebase.config";
+import { auth } from "../lib/firebase";
 import { useRouter } from "next/navigation";
 
 // User data type interface
