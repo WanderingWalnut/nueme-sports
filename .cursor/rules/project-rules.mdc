@@ -1,0 +1,71 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+# Global Reply Formatting
+- description: "Global rule: Every AI-generated reply must start with a greeting."
+  files:
+    - "**/*"
+  rules:
+    - "Ensure every reply starts with 'Hey Naveed,' before any other content."
+
+# Nueme Sports Scheduling & Sign-Up Webapp Cursor Rules
+# This file is meant to be stored in the .cursor/rules directory.
+# It configures rules for different parts of your Next.js project,
+# including frontend components, serverless backend functions, auto-generated files,
+# deployment configuration for Vercel, and domain-specific business logic.
+
+# Rule for Next.js Frontend (Pages & Components)
+- description: "Next.js Frontend Configuration for Nueme Sports"
+  files:
+    - "pages/**/*.{js,jsx,ts,tsx}"
+    - "components/**/*.{js,jsx,ts,tsx}"
+  rules:
+    - "Use functional components with React hooks."
+    - "Follow Next.js routing and file structure conventions."
+
+# Rule for Serverless Backend Functions via Firebase/Next.js
+- description: "Serverless Backend Functions for Scheduling & Sign-Ups"
+  files:
+    - "api/**/*.{js,ts}"
+  rules:
+    - "Ensure proper Firebase initialization and secure access to environment variables."
+    - "Optimize functions for cold starts and stateless operations."
+
+# Rule for Business Logic: Scheduling and Sign-Up
+- description: "Domain-Specific Business Logic for Scheduling and Sign-Ups"
+  files:
+    - "lib/scheduling/**/*.{js,ts}"
+    - "lib/signups/**/*.{js,ts}"
+  rules:
+    - "Clearly separate user functionality from admin session management."
+    - "Enforce validations for session creation and user sign-up flows."
+
+# Rule for Auto-Generated & Build Files
+- description: "Handling Auto-Generated Files"
+  files:
+    - "**/*.d.ts"
+    - "build/**/*"
+  rules:
+    - "Exclude from manual linting and strict review since these are auto-generated."
+
+# Rule for Vercel Deployment Configuration
+- description: "Vercel Deployment Settings"
+  files:
+    - "vercel.json"
+  rules:
+    - "Ensure that rewrites, headers, and other deployment settings are correctly defined."
+
+# Rule for UI and UX Guidelines (referencing external guidelines)
+- description: "UI and UX Standards for Nueme Sports"
+  files:
+    - "components/**/*.{js,jsx,ts,tsx}"
+  reference: "@file:ui_guidelines.rule"
+  rules:
+    - "Follow a consistent design system and component structure."
+    - "Ensure accessibility and responsive design throughout the UI."
+
