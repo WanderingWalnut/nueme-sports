@@ -4,10 +4,14 @@ import { RiUserAddFill } from "react-icons/ri";
 import { PiSoccerBallFill } from "react-icons/pi";
 import { FaRegCalendarAlt, FaArrowDown } from "react-icons/fa";
 import { useEffect } from "react";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
   useEffect(() => {
-    // Smooth scroll behavior for all anchor links
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
         e.preventDefault();
@@ -21,6 +25,10 @@ export default function Home() {
       });
     });
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -49,11 +57,17 @@ export default function Home() {
             Pick-Up Soccer. Anytime, Anywhere.
           </h1>
           <p className="text-xl text-white mb-8 animate-fade-in-up">
-            Join Calgary's most accessible drop-in soccer sessions
+            Join Calgary&apos;s most accessible drop-in soccer sessions
           </p>
           <button
             className="bg-white text-black rounded-full px-8 py-3 text-lg font-medium transition-all duration-300 ease-in-out transform hover:bg-gray-100 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 animate-fade-in-up"
-            onClick={() => (window.location.href = "/login")}
+            onClick={() => {
+              if (user?.uid) {
+                router.push("/dashboard");
+              } else {
+                router.push("/login");
+              }
+            }}
           >
             View Upcoming Sessions
           </button>
