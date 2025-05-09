@@ -4,13 +4,14 @@ import SessionsTable, { Session } from "@/components/SessionTable";
 import { useEffect, useState } from "react";
 import Header from "@/components/header";
 import SessionForm from "@/components/SessionForm";
-import { getSessions, isUserAdmin } from "@/lib/firestore";
+import { getSessions, isUserAdmin, registerForSession } from "@/lib/firestore";
 import { useAuth } from "@/context/AuthContext";
 
 const Dashboard = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isRegistering, setIsRegistering] = useState<string | null>(null);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -42,6 +43,23 @@ const Dashboard = () => {
     setShowForm(false);
   };
 
+  const handleRegisterForSession = async (sessionId: string) => {
+    if (!user?.uid) return;
+
+    try {
+      setIsRegistering(sessionId);
+      await registerForSession(sessionId, user.uid);
+      const updatedSessions = await getSessions();
+      setSessions(updatedSessions);
+      alert("Successfully registered for session!");
+    } catch (error) {
+      console.error("Failed to register for session:", error);
+      alert("Failed to register for session. Please try again.");
+    } finally {
+      setIsRegistering(null);
+    }
+  };
+
   return (
     <ProtectedRoute>
       <div className="container mx-auto flex min-h-screen py-2 flex-col">
@@ -61,7 +79,11 @@ const Dashboard = () => {
           <h1 className="mb-7 text-xl font-bold text-black">
             Upcoming Sessions
           </h1>
-          <SessionsTable sessions={sessions} />
+          <SessionsTable
+            sessions={sessions}
+            onRegister={handleRegisterForSession}
+            isRegistering={isRegistering}
+          />
         </div>
       </div>
     </ProtectedRoute>
